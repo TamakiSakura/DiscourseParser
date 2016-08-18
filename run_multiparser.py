@@ -8,7 +8,7 @@ from subprocess import call
 import run_parser
 
 
-def main(raw_file, output_dir):
+def main(input_dir, output_dir):
 	for infile in sorted(glob(os.path.join(input_dir,'*'))):
 		raw_file = os.path.join(input_dir,os.path.basename(infile))
 		filename = os.path.basename(os.path.splitext(infile)[0])
