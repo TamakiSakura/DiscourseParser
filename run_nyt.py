@@ -15,16 +15,15 @@ def parseFile(infile):
 #	group = filename.split("_")
 #	if(len(group)>1):
 #		group = group[1][:2]
-#	output_subdir = os.path.join(output_dir, group)
-
+	#output_subdir = os.path.join(output_dir, group)
 	#if(not os.path.isdir(output_subdir)):
 	#	os.mkdir(output_subdir)
 		
 	output_sen = os.path.join(output_dir,filename+'_sen.dis')
 	output_doc = os.path.join(output_dir,filename+'_doc.dis')
 	isParsed = os.path.isfile(output_sen) and os.path.isfile(output_doc)
-#	isSmall = os.path.getsize(raw_file) < 10000
-	isSmall = True;
+	isSmall = os.path.getsize(raw_file) < 10000
+#	isSmall = True;
 	if (not isParsed) and isSmall:
 		print filename, "starts at", format(datetime.now()) , "in process ", os.getpid()
 		#print "Start time: " + format(datetime.now())
@@ -46,15 +45,17 @@ def parseFile(infile):
 			traceback.print_exc()
 
 def main(input_dir, output_dir):
-	files = sorted(glob(os.path.join(input_dir,'*.txt')))
+	files = sorted(glob(os.path.join(input_dir,'*/*.txt')))
 	print "Number of cores available:", multiprocessing.cpu_count()
-#	for i in range(0, 25):
+#	for i in range(1, 32):
 #		serial = str(i)
 #		if i < 10:
 #			serial = '0' + serial
 #		subdir = os.path.join(output_dir, serial)
 #		if not os.path.isdir(subdir):
 #			os.mkdir(subdir)	
+	if not os.path.isdir(output_dir):
+		os.mkdir(output_dir)	
 	pool = multiprocessing.Pool()
 	pool.map(parseFile, files)
 	pool.close()

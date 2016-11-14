@@ -36,7 +36,7 @@ def main(raw_file, output_dir):
 	call(["cp", "temp/"+filename+"_tmp_sen.dis", join(output_dir, filename+"_sen.dis")])
 	call(["cp", "temp/"+filename+"_tmp_doc.dis", join(output_dir, filename+"_doc.dis")])
 	call(["rm"] + glob.glob("temp/"+filename+"_tmp*"))
-	call(["rm", join(output_dir, TMP_SEGMENTED_FILE)])
+	#call(["rm", join(output_dir, TMP_SEGMENTED_FILE)])
 	end_time = datetime.now()
 	print filename, "completed at:", format(end_time), ". Total time: [", format(end_time - start_time), "]"
 
